@@ -56,6 +56,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -151,14 +157,19 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PagesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Data\CategoryDTO.cs" />
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\PageDTO.cs" />
+    <Compile Include="Models\Data\ProductDTO.cs" />
     <Compile Include="Models\Data\SidebarDTO.cs" />
     <Compile Include="Models\ViewModels\Pages\PageVM.cs" />
     <Compile Include="Models\ViewModels\Pages\SidebarVM.cs" />
+    <Compile Include="Models\ViewModels\Shop\CategoryVM.cs" />
+    <Compile Include="Models\ViewModels\Shop\ProductVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +179,8 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="course files\ajax-loader.gif" />
+    <Content Include="Content\img\ajax-loader.gif" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="course files\ckeditor config.txt" />
     <Content Include="course files\connection string.txt" />
     <Content Include="course files\fileman\css\images\animated-overlay.gif" />
@@ -770,6 +782,28 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Uploads\Products\10\grapes1.jpg" />
+    <Content Include="Images\Uploads\Products\10\Thumbs\grapes1.jpg" />
+    <Content Include="Images\Uploads\Products\11\mand1.jpg" />
+    <Content Include="Images\Uploads\Products\11\Thumbs\mand1.jpg" />
+    <Content Include="Images\Uploads\Products\12\orange1.jpg" />
+    <Content Include="Images\Uploads\Products\12\Thumbs\orange1.jpg" />
+    <Content Include="Images\Uploads\Products\2\smiley 200x200.jpg" />
+    <Content Include="Images\Uploads\Products\2\Thumbs\smiley 200x200.jpg" />
+    <Content Include="Images\Uploads\Products\3\blue1.jpg" />
+    <Content Include="Images\Uploads\Products\3\Thumbs\blue1.jpg" />
+    <Content Include="Images\Uploads\Products\4\red1.jpg" />
+    <Content Include="Images\Uploads\Products\4\Thumbs\red1.jpg" />
+    <Content Include="Images\Uploads\Products\5\green1.png" />
+    <Content Include="Images\Uploads\Products\5\Thumbs\green1.png" />
+    <Content Include="Images\Uploads\Products\6\Thumbs\yellow1.png" />
+    <Content Include="Images\Uploads\Products\6\yellow1.png" />
+    <Content Include="Images\Uploads\Products\7\pink1.png" />
+    <Content Include="Images\Uploads\Products\7\Thumbs\pink1.png" />
+    <Content Include="Images\Uploads\Products\8\apple1.jpg" />
+    <Content Include="Images\Uploads\Products\8\Thumbs\apple1.jpg" />
+    <Content Include="Images\Uploads\Products\9\grapefruit1.jpg" />
+    <Content Include="Images\Uploads\Products\9\Thumbs\grapefruit1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -829,6 +863,10 @@
     <Content Include="fileman\lang\sk.json" />
     <Content Include="fileman\lang\tr.json" />
     <Content Include="fileman\web.config" />
+    <Content Include="Areas\Admin\Views\Shop\Categories.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\AddProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\Products.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\EditProduct.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
@@ -1173,6 +1211,14 @@
     <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1208,6 +1254,17 @@
     <Folder Include="fileman\tmp\" />
     <Folder Include="fileman\Uploads\Documents\" />
     <Folder Include="fileman\Uploads\FLV\" />
+    <Folder Include="Images\Uploads\Products\10\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\11\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\12\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\2\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\3\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\4\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\5\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\6\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\7\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\8\Gallery\Thumbs\" />
+    <Folder Include="Images\Uploads\Products\9\Gallery\Thumbs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
